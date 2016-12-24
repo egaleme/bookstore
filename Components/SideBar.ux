@@ -1,0 +1,84 @@
+<Panel ux:Class="SideBar">	
+	<Router ux:Dependency="router" />	
+	<JavaScript File="SideBar.js" />
+		<ScrollView>
+			<StackPanel  Margin="10">
+
+			<Text TextColor="#000" Alignment="Center" Value="BookStore" FontSize="35" Margin="10">
+				<Font File="../Assets/fonts/AlegreyaSans-Bold.otf"/>
+			</Text>
+			<Text TextColor="#000" Alignment="Center" Opacity="0.5" Value="by Gab Aleme" Margin="10">
+				<Font File="../Assets/fonts/AlegreyaSans-Bold.otf"/>
+			</Text>
+			<Grid ColumnCount="2" RowCount="2">
+						
+							<Text Row="0" Column="0" TextColor="#000" Value="SignUp" FontSize="20" Margin="20" Alignment="Center">
+								<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+								<WhileTrue Value="{isLoggedIn}">
+								<Scale Factor="0"/>
+							</WhileTrue>
+							</Text>
+							<Text Row="0" Column="1" Clicked="{goLogin}" TextColor="#000" Value="Login" FontSize="20" Margin="20" Alignment="Center">
+								<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+								<WhileTrue Value="{isLoggedIn}">
+								<Scale Factor="0"/>
+							</WhileTrue>
+							</Text>
+															
+							<Text  Row="1" Column="0" TextColor="#000" Value="{user}" FontSize="20" Margin="20" Alignment="Center">
+								<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+								<WhileFalse Value="{isLoggedIn}">
+								<Scale Factor="0"/>
+							</WhileFalse>
+							</Text>
+							<Text Row="1" Column="1" Clicked="{logout}" TextColor="#000" Value="Logout" FontSize="20" Margin="20" Alignment="Center">
+								<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+								<WhileFalse Value="{isLoggedIn}">
+								<Scale Factor="0"/>
+								</WhileFalse>
+							</Text>
+							
+						
+					</Grid>
+			<Rectangle Height="1" Color="#ea3535" Opacity="0.5" HitTestMode="LocalBoundsAndChildren" />
+				<Panel Height="48" HitTestMode="LocalBoundsAndChildren">
+					<Text TextColor="#000" Alignment="Center" Value="Browse Books">
+						<Font File="../Assets/fonts/AlegreyaSans-Bold.otf"/>
+					</Text>
+					<Clicked Handler="{goHome}"/>
+				</Panel>
+				<Rectangle Height="1" Color="#ea3535" Opacity="0.5" />
+				<Panel ux:Name="cart" Height="48" HitTestMode="LocalBoundsAndChildren">
+					<Text TextColor="#000" Alignment="Center" Value="My Cart">
+						<Font File="../Assets/fonts/AlegreyaSans-Bold.otf"/>
+
+					</Text>
+					<WhileFalse Value="{isLoggedIn}">
+							<Scale Target="cart" Factor="0" />
+					</WhileFalse>
+					<Clicked Handler="{goCart}" />
+				</Panel>
+				<Rectangle Height="1" Color="#ea3535" Opacity="0.5" >
+					<WhileFalse Value="{isLoggedIn}">
+							<Scale Factor="0" />
+						</WhileFalse>
+				</Rectangle>
+				<Panel Height="48">
+					<Text TextColor="#000" Alignment="Center" Value="My Purchases">
+						<Font File="../Assets/fonts/AlegreyaSans-Bold.otf"/>
+					</Text>
+					<WhileFalse Value="{isLoggedIn}">
+							<Scale Factor="0" />
+					</WhileFalse>
+					<Clicked Handler="{goPurchases}" />
+				</Panel>
+				<Rectangle Height="1" Color="#ea3535" Opacity="0.5" >
+					<WhileFalse Value="{isLoggedIn}">
+							<Scale Factor="0" />
+						</WhileFalse>
+				</Rectangle>
+				
+			</StackPanel>
+		</ScrollView>			
+
+</Panel>

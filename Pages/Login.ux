@@ -1,0 +1,64 @@
+<Panel ux:Class="Login">
+	
+	<Router ux:Dependency="router" />
+	<JavaScript File="Login.js" />
+	<EdgeNavigator ux:Name="EdgeNavigator">
+		<SideBar router="router" ux:Name="menu" Width="220" EdgeNavigation.Edge="Left">
+			<ActivatingAnimation>
+					<Change mainAppTranslation.X="220" />
+					<!-- Change to cross out -->
+					<Change topMenuTranslation.Y="0" />
+					<Change bottomMenuTranslation.Y="0" />
+					<Change middleRectangle.Opacity="0" Easing="CircularOut" />
+					<Change topMenuRotation.Degrees="45" Easing="ExponentialIn" />
+					<Change bottomMenuRotation.Degrees="-45" Easing="ExponentialIn" />
+					<Change topRectangle.Width="28" />
+					<Change bottomRectangle.Width="28" />
+			</ActivatingAnimation>
+		</SideBar>
+		<DockPanel>
+			<Translation ux:Name="mainAppTranslation" />
+			<DockPanel Dock="Top">
+				
+				<Panel Height="48" Color="#ea3535">
+					<Grid Columns="auto, 1*, auto" Background="#ea3535" >
+									<Panel Margin="7,5,5,5" Height="32" Width="32" HitTestMode="LocalBounds">
+										<Clicked>
+											<Set EdgeNavigator.Active="menu" />
+										</Clicked>
+										<Rectangle ux:Name="topRectangle" Height="2" Width="26" Fill="#fff">
+											<Translation Y="-9" ux:Name="topMenuTranslation" />
+											<Rotation ux:Name="topMenuRotation" />
+										</Rectangle>
+										<Rectangle ux:Name="middleRectangle" Height="2" Width="26" Fill="#fff" />
+										<Rectangle ux:Name="bottomRectangle" Height="2" Width="26" Fill="#fff">
+											<Translation Y="9" ux:Name="bottomMenuTranslation" />
+											<Rotation ux:Name="bottomMenuRotation" />
+										</Rectangle>
+									</Panel>
+									<Text FontSize="20" Alignment="VerticalCenter" TextAlignment="Center" TextColor="White" >Login
+										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+									</Text>
+									<Panel Margin="5,5,7,5" Height="32" Width="32" HitTestMode="LocalBounds">
+											<Clicked Handler="{}" />							
+											<Image File="../Assets/cart.png" Alignment="VerticalCenter"/>
+									</Panel>
+						</Grid>
+				</Panel>
+			</DockPanel>
+			<!-- Main View -->
+			
+				<StackPanel Alignment="VerticalCenter" Dock="Top" Margin="30">
+					<TextInput TextColor="#000" Margin="10" PlaceholderText="username" PlaceholderColor="#0f010780" Value="{username}" />
+					<Rectangle Height="1" Color="#ea353580" Opacity="0.3"/>
+					<TextInput TextColor="#000" Margin="10" PlaceholderText="password" PlaceholderColor="#0f010780" Value="{password}" IsPassword="true"/>
+					<Rectangle Height="1" Color="#ea353580" Opacity="0.3"/>
+					<Panel >
+            			<Rectangle Color="#ea3535" Height="40" Margin="20" Width="100" CornerRadius="80">
+              				<Text Value="Login" Alignment="Center" TextColor="White" Clicked="{login}"/>
+            			</Rectangle>
+         			 </Panel>										
+				</StackPanel>	
+		</DockPanel>
+	</EdgeNavigator>
+</Panel>

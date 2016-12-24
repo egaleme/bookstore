@@ -1,0 +1,109 @@
+<Panel ux:Class="Cart">
+
+	<Router ux:Dependency="router" />
+	<JavaScript File="Cart.js" />
+	<EdgeNavigator ux:Name="EdgeNavigator">
+		<SideBar router="router" ux:Name="menu" Width="220" EdgeNavigation.Edge="Left">
+			<ActivatingAnimation>
+					<Change mainAppTranslation.X="220" />
+					<!-- Change to cross out -->
+					<Change topMenuTranslation.Y="0" />
+					<Change bottomMenuTranslation.Y="0" />
+					<Change middleRectangle.Opacity="0" Easing="CircularOut" />
+					<Change topMenuRotation.Degrees="45" Easing="ExponentialIn" />
+					<Change bottomMenuRotation.Degrees="-45" Easing="ExponentialIn" />
+					<Change topRectangle.Width="28" />
+					<Change bottomRectangle.Width="28" />
+			</ActivatingAnimation>
+		</SideBar>
+		<DockPanel>
+			<Translation ux:Name="mainAppTranslation" />
+			<DockPanel Dock="Top">
+
+				<Panel Height="48" Color="#ea3535">
+					<Grid Columns="auto, 1*, auto" Background="#ea3535" >
+									<Panel Margin="7,5,5,5" Height="32" Width="32" HitTestMode="LocalBounds">
+										<Clicked>
+											<Set EdgeNavigator.Active="menu" />
+										</Clicked>
+										<Rectangle ux:Name="topRectangle" Height="2" Width="26" Fill="#fff">
+											<Translation Y="-9" ux:Name="topMenuTranslation" />
+											<Rotation ux:Name="topMenuRotation" />
+										</Rectangle>
+										<Rectangle ux:Name="middleRectangle" Height="2" Width="26" Fill="#fff" />
+										<Rectangle ux:Name="bottomRectangle" Height="2" Width="26" Fill="#fff">
+											<Translation Y="9" ux:Name="bottomMenuTranslation" />
+											<Rotation ux:Name="bottomMenuRotation" />
+										</Rectangle>
+									</Panel>
+									<Text FontSize="20" Alignment="VerticalCenter" TextAlignment="Center" TextColor="White" >Your Cart
+										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+									</Text>
+									<Panel Margin="5,5,7,5" Height="32" Width="32" HitTestMode="LocalBounds">
+											<Clicked Handler="{}" />
+											<Image File="../Assets/cart.png" Alignment="VerticalCenter"/>
+									</Panel>
+						</Grid>
+				</Panel>
+			</DockPanel>
+			<SwipeGesture ux:Name="swipeGesture" Direction="Left" Length="30" Type="Active"/>
+			<!-- Main View -->
+			<DockPanel>
+				<Panel Dock="Top" Margin="10">
+					<Panel ux:Name="nobooks" Color="#000" Opacity="0.4" Height="40">
+						<Text TextColor="White" Value="No Books in the cart" Alignment="Center">
+							<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+						</Text>
+						<WhileTrue Value="{noItems}">
+							<Scale Factor="0" />
+							<Change nobooks.Opacity="0" />
+						</WhileTrue>
+					</Panel>
+					<Panel ux:Name="checkout">
+						<Rectangle Color="#000" Opacity="0.4" Height="40" Width="100%" >
+											<Text Value="Checkout Cart" Alignment="Center" TextColor="White">
+												<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+											</Text>
+							</Rectangle>
+									<WhileFalse Value="{noItems}">
+										<Scale Factor="0" />
+										<Change checkout.Opacity="0" />
+									</WhileFalse>
+									<Clicked Handler="{checkout}" />
+						</Panel>
+				</Panel>
+				<ScrollView>
+					<StackPanel Alignment="Top">
+						<Each Items="{cartItems}">
+							<DockPanel>
+
+								<Rectangle Height="1" Color="#ea353580" Opacity="0.3" Dock="Top"/>
+								<Image  Width="60" Height="60" File="{picture}" Dock="Left" Margin="10"/>
+								<Grid ux:Name="cartGrid" Rows="1*, 1*, 1*" Margin="10">
+
+									<Text TextColor="#000" Value="{title}">
+										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+									</Text>
+									<Text TextColor="#000" Value="{author}">
+										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+									</Text>
+									<StackPanel Orientation="Horizontal">
+										<Text TextColor="#000" Value="$" />
+										<Text TextColor="#000" Value="{cost}">
+											<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+										</Text>
+										<Rectangle  HitTestMode="LocalBounds" Margin="10,0,0,0" Alignment="Right" ux:Name="removeBtn" Color="#ea3535" Height="15">
+											<Text TextColor="White" FontSize="10" Value="Remove" Alignment="Center" />
+											<Tapped Handler="{remove}" />
+										</Rectangle>
+									</StackPanel>
+								</Grid>
+
+							</DockPanel>
+						</Each>
+					</StackPanel>
+				</ScrollView>
+			</DockPanel>
+		</DockPanel>
+	</EdgeNavigator>
+</Panel>
