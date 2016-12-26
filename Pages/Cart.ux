@@ -79,26 +79,41 @@
 
 								<Rectangle Height="1" Color="#ea353580" Opacity="0.3" Dock="Top"/>
 								<Image  Width="60" Height="60" File="{picture}" Dock="Left" Margin="10"/>
-								<Grid ux:Name="cartGrid" Rows="1*, 1*, 1*" Margin="10">
-
-									<Text TextColor="#000" Value="{title}">
-										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
-									</Text>
-									<Text TextColor="#000" Value="{author}">
-										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
-									</Text>
-									<StackPanel Orientation="Horizontal">
-										<Text TextColor="#000" Value="$" />
-										<Text TextColor="#000" Value="{cost}">
+								<Panel>
+									<Grid ux:Name="grid" Rows="1*, 1*, 1*" Margin="10">
+										<Text TextColor="#000" Value="{title}">
 											<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
 										</Text>
-										<Rectangle  HitTestMode="LocalBounds" Margin="10,0,0,0" Alignment="Right" ux:Name="removeBtn" Color="#ea3535" Height="15">
+										<Text TextColor="#000" Value="{author}">
+											<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+										</Text>
+										<StackPanel Orientation="Horizontal">
+											<Text TextColor="#000" Value="$" />
+											<Text TextColor="#000" Value="{cost}">
+												<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
+											</Text>
+										</StackPanel>
+									</Grid>
+									<StackPanel Opacity="0" Orientation="Horizontal" ux:Name="removeBtn">
+										<Rectangle  HitTestMode="LocalBounds" Margin="10,0,0,0" Color="#ea3535" Height="15">
 											<Text TextColor="White" FontSize="10" Value="Remove" Alignment="Center" />
 											<Tapped Handler="{remove}" />
 										</Rectangle>
+										<Rectangle  HitTestMode="LocalBounds" Margin="10,0,0,0"  Color="#ea3535" Height="15">
+											<Text TextColor="White" FontSize="10" Value="undo" Alignment="Center" />
+											<Tapped Handler="{undo}" />
+										</Rectangle>
 									</StackPanel>
-								</Grid>
-
+									<WhileTrue Value="{isRemoved}">
+										<Scale Target="removeBtn" Factor="1"/>
+										<Change removeBtn.Opacity="1"/>
+										<Scale Target="grid" Factor="0" />
+										<Change grid.Opacity="0" />
+									</WhileTrue>
+									<Tapped>
+										<Callback Handler="{clicked}"/>
+									</Tapped>
+								</Panel>
 							</DockPanel>
 						</Each>
 					</StackPanel>

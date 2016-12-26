@@ -18,6 +18,7 @@ function getBooks() {
 	.then(function(data) {
 		store.replaceAll(data)
 		store.forEach(function(book) {
+			book.isRemoved = Observable(false)
 			books.add(book);
 		});
 	})
@@ -33,8 +34,9 @@ function login(username, password) {
 }
 
 function addToCart(id, cost, title, picture, author) {
+	var isRemoved = Observable(false)
 	total.value = 0
-	cart.add({id: id, qty:1, cost: cost, title: title, picture: picture, author: author})
+	cart.add({id: id, isRemoved: isRemoved, qty:1, cost: cost, title: title, picture: picture, author: author})
 	cart.forEach(function(book) {
 		total.value = (total.value + (book.cost * book.qty))
 	})

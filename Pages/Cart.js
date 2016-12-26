@@ -1,14 +1,18 @@
 var Context = require("Modules/Context")
 var Observable = require("FuseJS/Observable")
 
-var cart = Context.cart.map(function(x) {
-	x.handler = function() {
-		
-	}
-	return x;
-})
 function checkout() {
 	router.push("purchases")
+}
+
+function clicked(args) {
+	var b = args.data
+	b.isRemoved.value = !b.isRemoved.value
+}
+
+function undo(args) {
+	var b = args.data
+	b.isRemoved.value = "false"
 }
 
 function remove(args) {
@@ -16,7 +20,9 @@ function remove(args) {
 	Context.removeFromCart(book)
 }
 module.exports = {
-	cartItems: cart,
+	undo: undo,
+	clicked: clicked,
+	cartItems: Context.cart,
 	noItems: Context.emptyCart,
 	checkout: checkout,
 	remove: remove
