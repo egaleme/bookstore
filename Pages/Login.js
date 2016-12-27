@@ -4,6 +4,13 @@ var Observable = require("FuseJS/Observable")
 var username = Observable()
 var password = Observable()
 var err = Observable()
+var isdisabled = Observable(function() {
+	if (username.value || password.value) {
+		isdisabled.value = true
+	} else {
+		isdisabled.value = false
+	}
+})
 
 function login() {
 	Context.login(username.value, password.value).
@@ -17,7 +24,10 @@ function login() {
   })
 }
 
+
+
 module.exports = {
+	isdisabled,
 	login,
 	username,
 	password

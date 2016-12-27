@@ -1,5 +1,5 @@
 <Panel ux:Class="Login">
-	
+
 	<Router ux:Dependency="router" />
 	<JavaScript File="Login.js" />
 	<EdgeNavigator ux:Name="EdgeNavigator">
@@ -19,7 +19,7 @@
 		<DockPanel>
 			<Translation ux:Name="mainAppTranslation" />
 			<DockPanel Dock="Top">
-				
+
 				<Panel Height="48" Color="#ea3535">
 					<Grid Columns="auto, 1*, auto" Background="#ea3535" >
 									<Panel Margin="7,5,5,5" Height="32" Width="32" HitTestMode="LocalBounds">
@@ -40,25 +40,33 @@
 										<Font File="../Assets/fonts/AlegreyaSans-Bold.otf" />
 									</Text>
 									<Panel Margin="5,5,7,5" Height="32" Width="32" HitTestMode="LocalBounds">
-											<Clicked Handler="{}" />							
+											<Clicked Handler="{}" />
 											<Image File="../Assets/cart.png" Alignment="VerticalCenter"/>
 									</Panel>
 						</Grid>
 				</Panel>
 			</DockPanel>
 			<!-- Main View -->
-			
+
 				<StackPanel Alignment="VerticalCenter" Dock="Top" Margin="30">
 					<TextInput TextColor="#000" Margin="10" PlaceholderText="username" PlaceholderColor="#0f010780" Value="{username}" />
 					<Rectangle Height="1" Color="#ea353580" Opacity="0.3"/>
 					<TextInput TextColor="#000" Margin="10" PlaceholderText="password" PlaceholderColor="#0f010780" Value="{password}" IsPassword="true"/>
 					<Rectangle Height="1" Color="#ea353580" Opacity="0.3"/>
 					<Panel >
-            			<Rectangle Color="#ea3535" Height="40" Margin="20" Width="100" CornerRadius="80">
+            			<Rectangle  ux:Name="loginBtn" Color="#ea3535" Height="40" Margin="20" Width="100" CornerRadius="80">
               				<Text Value="Login" Alignment="Center" TextColor="White" Clicked="{login}"/>
             			</Rectangle>
-         			 </Panel>										
-				</StackPanel>	
+									<WhileFalse Value="{isdisabled}">
+										<Change loginBtn.Opacity="0.5"/>
+										<Change loginBtn.IsEnabled="false"/>
+									</WhileFalse>
+									<WhileTrue Value="{isdisabled}">
+										<Change loginBtn.Opacity="1"/>
+										<Change loginBtn.IsEnabled="true"/>
+									</WhileTrue>
+         	</Panel>
+				</StackPanel>
 		</DockPanel>
 	</EdgeNavigator>
 </Panel>
