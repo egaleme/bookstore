@@ -24,8 +24,6 @@ function login() {
   })
 }
 
-
-
 module.exports = {
 	isdisabled,
 	login,
