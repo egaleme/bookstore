@@ -114,6 +114,12 @@
 										<Callback Handler="{clicked}"/>
 									</Tapped>
 								</Panel>
+								<LayoutAnimation>
+									<Move RelativeTo="LayoutChange" Y="1" Duration="0.8" Easing="ElasticIn" />
+								</LayoutAnimation>
+								<RemovingAnimation>
+									<Move RelativeTo="Size" X="-1" Duration="0.4" Easing="CircularOut" />
+								</RemovingAnimation>
 							</DockPanel>
 						</Each>
 					</StackPanel>
